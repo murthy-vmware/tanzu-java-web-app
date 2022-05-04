@@ -1,6 +1,6 @@
-SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='murthy-vmware/tanzu-java-web-app/tanzu-java-web-app-source')
-LOCAL_PATH = os.getenv("LOCAL_PATH", default='.')
-NAMESPACE = os.getenv("NAMESPACE", default='default')
+SOURCE_IMAGE = os.getenv("SOURCE_IMAGE", default='murthyvm/tanzu-java-web-app-source')
+LOCAL_PATH = os.getenv("LOCAL_PATH", default='./tanzu-java-web-app')
+NAMESPACE = os.getenv("NAMESPACE", default='murthy-sandbox')
 
 k8s_custom_deploy(
     'tanzu-java-web-app',
@@ -20,3 +20,5 @@ k8s_custom_deploy(
 
 k8s_resource('tanzu-java-web-app', port_forwards=["8080:8080"],
             extra_pod_selectors=[{'serving.knative.dev/service': 'tanzu-java-web-app'}])
+
+allow_k8s_contexts('gke_murthy-309416_us-central1-c_tap-workshop')
